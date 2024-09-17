@@ -9,15 +9,16 @@
 using namespace std;
 int const N=1e5+10;
 vector<int>g[N];
+int vis[N];
 ll const mod=1e9+7;
 
-void dfs(int ver,int par){
+void dfs(int ver){
     //take action before entering in vertex
-        
+        vis[ver]=1;
         for(auto child:g[ver]){
             //take action before entering in child
-            if(child==par)continue;
-            dfs(child,ver);
+            if(vis[child])continue;
+            dfs(child);
     //take action after exiting child
             
         }
@@ -35,5 +36,5 @@ int main() {
     }
 
     
-    dfs(1,0);
+    dfs(1);
 }
