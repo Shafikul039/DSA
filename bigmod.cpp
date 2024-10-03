@@ -1,7 +1,25 @@
-ll bigmod(ll a,ll b,ll m){
-    if(b==0)return 1;
-    if(b%2!=0)return ((a%m) * bigmod(a,b-1,m))%m;
-    else{
-        return ((bigmod(a,b/2,m)%m) * (bigmod(a,b/2,m)%m))%m;
+long long bigmod(long long a, long long b) {
+    long long ans=1;
+    a=a%m;
+    while (b) {
+        if (b&1) {
+            ans=(ans*a)%m;
+        }
+        b>>=1;
+        a=(a*a)%m;
     }
+    return ans;
+}
+
+long long binmulty(long long a,long long b){
+        long long ans=0;
+        a=a%m;
+        while(b){
+            if(b&1){
+                ans=(ans+a)%m;
+            }
+            a=(a+a)%m;
+            b>>=1;
+        }
+        return ans;
 }
