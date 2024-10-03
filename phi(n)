@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+#define yes cout << "YES" << endl
+#define no cout << "NO" << endl
+#define pb push_back
+#define ll long long
+#define all(v) (v).begin(), (v).end()
+#define Pair pair<long, long>
+#define fast ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+using namespace std;
+typedef pair<ll,ll> pr;
+
+int main(){
+    int n,c=0;cin>>n;
+    vector<int>prime_factor;
+    vector<pair<int,int>>dpf;
+    int phi=n;
+    for(int i=2;i*i<=n;i++){
+            c=0;
+        while(n%i==0){
+            c++;
+            prime_factor.push_back(i);
+            n/=i;
+        }
+        if(c)dpf.push_back({i,c});
+    }
+    if(n>1)prime_factor.push_back(n),dpf.push_back({n,1});
+    for(auto i:dpf){
+        int p1=i.first;
+        phi=(phi/p1)*(p1-1);
+    }
+    cout<<phi<<endl;
+}
