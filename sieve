@@ -5,8 +5,9 @@ void sieveOfEratosthenes(int n) {
     isPrime[0] = isPrime[1] = false;
 
     for (int p = 2; p * p <= n; p++) {
-        lp[p]=hp[p]=p;
+        
         if (isPrime[p]) {
+            lp[p]=hp[p]=p;
             for (int i = p * p; i <= n; i += p) {
                 hp[i]=p;
                 isPrime[i] = false;
