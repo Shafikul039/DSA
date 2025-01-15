@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+#define yes cout << "YES" << endl
+#define no cout << "NO" << endl
+#define pb push_back
+#define ll long long
+#define all(v) (v).begin(), (v).end()
+#define Pair pair<long, long>
+#define fast ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+using namespace std;
+int const N=1e5+10;
+vector<int>g[N];
+int vis[N];
+int level[N];
+ll const mod=1e9+7;
+
+void dfs(int ver,int p){
+    //take action before entering in vertex
+        vis[ver]=1;
+        for(auto child:g[ver]){
+            //take action before entering in child
+            if(vis[child])continue;
+            dfs(child,ver);
+            //take action after exiting child    
+        }
+        //take action after exiting vertex
+}
+
+void bfs(int source){
+    queue<int>q;
+    q.push(source);
+    vis[source]=1;
+    while(!q.empty()){
+        int ver=q.front();
+        q.pop();
+        for(auto child:g[ver]){
+            if(!vis[child]){
+                q.push(child);
+                vis[child]=1;
+                level[child]=level[ver]+1;
+            }
+        }
+    }
+}
+
+int main() {
+    fast
+    int n,m;
+    cin>>n;
+    for(int i=0;i<n-1;i++){
+        int x,y;cin>>x>>y;
+        g[x].pb(y);
+        g[y].pb(x);
+    }
+    bfs(1);
+}
