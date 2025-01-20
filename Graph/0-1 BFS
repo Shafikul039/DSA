@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll   long long
+#define pb   push_back
+#define yes   cout<<"YES"<<endl
+#define no   cout<<"NO"<<endl
+#define all(x) (x).begin(), (x).end()
+#define    gcd(a,b)      __gcd(a,b)
+#define    lcm(a,b)  (a*b)/__gcd(a,b)
+#define optimize() ios_base::sync_with_stdio(false);cin.tie(nullptr);
+const ll N=1e5+7,INF=1e18;
+ll mod=1e9+7;
+vector<pair<ll,ll>>g[N];
+vector<ll>level(N,INF);
+
+void bfs(ll source){
+    deque<ll>q;
+    q.push_back(source);
+    level[source]=0;
+    while(!q.empty()){
+        ll ver=q.front();
+        q.pop_front();
+        
+        for(auto child:g[ver]){
+            ll cur_c=child.first;
+            ll wt=child.second;
+            if(level[ver]+wt<level[cur_c]){
+                level[cur_c]=level[ver]+wt;
+                if(wt){
+                    q.pb(cur_c);
+                }
+                else{
+                    q.push_front(cur_c);
+                }
+            }
+        }
+    }
+}
+
+int main(){
+    optimize()
+    ll n,m;cin>>n>>m;
+    for(int i=0;i<m;i++){
+        ll x,y;
+        cin>>x>>y;
+        g[x].pb({y,0});
+        g[y].pb({x,1});
+    }
+    bfs(1);
+    if(level[n]==INF){
+        cout<<-1<<endl;
+        return 0;
+    }
+    cout<<level[n]<<endl;
+    
+}
