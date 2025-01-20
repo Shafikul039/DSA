@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+#define yes cout << "YES" << endl
+#define no cout << "NO" << endl
+#define pb push_back
+#define ll long long
+#define all(v) (v).begin(), (v).end()
+#define Pair pair<long, long>
+#define fast ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+using namespace std;
+int const N=1e5+10;
+vector<int>g[N];
+int e[N],n,m;
+vector<int>ans;
+ll const mod=1e9+7;
+
+
+void order(){
+    queue<int>q;
+    for(int i=1;i<=n;i++){
+        if(e[i]==0)q.push(i);
+    }
+    while(!q.empty()){
+        int ver=q.front();
+        q.pop();
+        ans.pb(ver);
+        for(auto child:g[ver]){
+            e[child]--;
+            if(e[child]==0){
+                q.push(child); 
+            }
+        }
+    }
+}
+
+int main() {
+    fast
+    
+    cin>>n>>m;
+    for(int i=0;i<m;i++){
+        int x,y;cin>>x>>y;
+        g[x].pb(y);
+        e[y]++;
+    }
+    order();
+    if(ans.size()!=n){
+        cout<<"IMPOSSIBLE"<<endl;
+        return 0;
+    }
+    for(auto &u:ans)cout<<u<<" ";cout<<endl;
+}
