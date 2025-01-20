@@ -17,18 +17,20 @@ ll dis[N];
 void bfs(ll source){
     priority_queue<tuple<ll,ll,ll>,vector<tuple<ll,ll,ll>>, greater<tuple<ll,ll,ll>>>q;
     q.push({0,source,-1});
-    //vis[source]=1;
-    //dis[source]=0;
+
     while(!q.empty()){
         tuple<ll,ll,ll>ver=q.top();
         q.pop();
+
         ll cur_v=get<1>(ver);
         ll cur_wt=get<0>(ver);
         ll p=get<2>(ver);
+
         if(vis[cur_v])continue;
         dis[cur_v]=cur_wt;
         parent[cur_v]=p;
         vis[cur_v]=1;
+
         for(auto child:g[cur_v]){
             ll cur_c=child.first;
             ll wt=child.second;
@@ -49,11 +51,13 @@ int main(){
         g[y].pb({x,w});
     }
     bfs(1);
-    cout<<dis[n]<<endl;
+    
     if(!vis[n]){
         cout<<-1<<endl;
         return 0;
     }
+
+    cout<<dis[n]<<endl;
     ll p=parent[n];
     vector<ll>ans;
     ans.pb(n);
