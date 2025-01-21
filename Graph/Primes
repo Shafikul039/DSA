@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll   long long
+#define pb   push_back
+#define yes   cout<<"YES"<<endl
+#define no   cout<<"NO"<<endl
+#define all(x) (x).begin(), (x).end()
+#define    gcd(a,b)      __gcd(a,b)
+#define    lcm(a,b)  (a*b)/__gcd(a,b)
+#define optimize() ios_base::sync_with_stdio(false);cin.tie(nullptr);
+const ll N=1e5+7,INF=1e18;
+ll mod=1e9+7;
+vector<pair<ll,ll>>g[N];
+ll vis[N],parent[N];
+ll dis[N],c,ans;
+
+void bfs(ll source){
+    priority_queue<pair<ll,ll>,vector<pair<ll,ll>>, greater<pair<ll,ll>>>q;
+    q.push({0,source});
+
+    while(!q.empty()){
+        pair<ll,ll>ver=q.top();
+        q.pop();
+
+        ll cur_v=ver.second;
+        ll cur_wt=ver.first;
+
+        if(vis[cur_v])continue;
+        ans+=cur_wt;c++;
+        vis[cur_v]=1;
+
+        for(auto child:g[cur_v]){
+            ll cur_c=child.first;
+            ll wt=child.second;
+            if(!vis[cur_c]){
+                q.push({wt,cur_c});
+            }
+        }
+    }
+}
+
+int main(){
+    optimize()
+    ll n,m;cin>>n>>m;
+    for(int i=0;i<m;i++){
+        ll x,y,w;
+        cin>>x>>y>>w;
+        g[x].pb({y,w});
+        g[y].pb({x,w});
+    }
+    bfs(1);
+    
+    if(c!=n){
+        cout<<"IMPOSSIBLE"<<endl;
+        return 0;
+    }
+    cout<<ans<<endl;
+}
