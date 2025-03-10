@@ -17,20 +17,4 @@ void sieveOfEratosthenes(int n) {
             }
         }
     }
-    int a;cin>>a;
-    vector<int>prime_factors;
-    while(a>1){
-        int prime_factor=hp[a];
-        while(a%prime_factor==0){
-            a/=prime_factor;
-            prime_factors.push_back(prime_factor);
-        }
-    }
-
-    for (int p = 2; p <= n; p++) {
-        if (isPrime[p]) {
-            cout << p << " ";
-        }
-    }
-    cout << endl;
 }
