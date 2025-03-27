@@ -1,0 +1,11 @@
+void dfs(int ver,int p){
+    //take action before entering in vertex
+        vis[ver]=1;
+        for(auto child:g[ver]){
+            //take action before entering in child
+            if(vis[child])continue;
+            dfs(child,ver);
+            //take action after exiting child    
+        }
+        //take action after exiting vertex
+}
