@@ -1,0 +1,16 @@
+void bfs(int source){
+    queue<int>q;
+    q.push(source);
+    vis[source]=1;
+    while(!q.empty()){
+        int ver=q.front();
+        q.pop();
+        for(auto child:g[ver]){
+            if(!vis[child]){
+                q.push(child);
+                vis[child]=1;
+                level[child]=level[ver]+1;
+            }
+        }
+    }
+}
