@@ -1,0 +1,14 @@
+const int N = 1e5 + 5;
+vector<int> g[N];
+bool vis[N];
+int depth[N], height[N];
+
+void dfs(int ver, int p) {
+    vis[ver] = 1;
+    for (auto child : g[ver]) {
+        if (child == p) continue;
+        depth[child] = depth[ver] + 1;
+        dfs(child, ver);
+        height[ver] = max(height[ver], height[child] + 1);
+    }
+}
