@@ -1,0 +1,13 @@
+ //μ(n) = 0 if n has any squared prime factor.
+ //μ(n) = (-1)^k if n is a product of k distinct primes.
+ //The sum over divisors: ∑_{d|n} μ(d) = 1 if n = 1, else 0.
+ //Möbius inversion formula: If g(n) = ∑_{d|n} f(d), then  f(n) = ∑_{d|n} μ(d) * g(n/d).
+
+void compute_mobius(ll n) {
+    mu[1] = 1;
+    for (ll i = 1; i < N; i++) {
+        for (ll j = i + i; j < N; j += i) {
+            mu[j] -= mu[i];
+        }
+    }
+}
