@@ -1,0 +1,16 @@
+void pre() {
+    fact[0] = fact[1] = 1;
+ 
+    for (int i = 2; i < N; i++) {
+        fact[i] = (fact[i - 1] * i) % M;
+    }
+ 
+    invFact[N - 1] = bigmod(fact[N - 1], M - 2) % M;
+    for (int i = N - 2; i >= 0; i--) {
+        invFact[i] = (invFact[i + 1] * (i + 1)) % M;
+    }
+}
+
+ll nCr(ll n, ll r) {
+    return ((fact[n] * invFact[n - r]) % M * invFact[r]) % M;
+}
