@@ -1,0 +1,21 @@
+const ll Log = 22, N = 1e5 + 7;
+ll Min[N][Log], Max[N][Log];
+
+void sparse(vector<ll> &arr, ll n) {
+    for (int i = 1; i <= n; i++) Min[i][0] = Max[i][0] = arr[i];
+    
+    ll sz = 32 - __builtin_clz(n);
+    for (int j = 1; j < sz; j++) {
+        for (int i = 1; i + (1 << j) - 1 <= n; i++) {
+            Min[i][j] = min (Min[i][j - 1], Min[i + (1<<(j - 1))][j - 1]);
+            Max[i][j] = max (Max[i][j - 1], Max[i + (1<<(j - 1))][j - 1]);
+        }
+    }
+}
+
+pair<ll,ll> query(ll L, ll R) {
+    ll j = 31 - __builtin_clz(R - L + 1);
+    ll mn = min(Min[L][j], Min[R - (1<<j) + 1][j]);
+    ll mx = max(Max[L][j], Max[R - (1<<j) + 1][j]);
+    return {mn, mx};
+}
