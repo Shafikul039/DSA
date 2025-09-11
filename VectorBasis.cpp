@@ -14,3 +14,23 @@ void insertVector(int mask) {
         mask ^= basis[i]; // Eliminate the i-th bit using XOR with existing basis
     }
 }
+// O(n * d)
+
+// For a set of independent vectors, we can change any of these vectors by adding to it any linear combination of all of them,
+// and the vectors will still stay independent. What's more fascinating is that, the set of vectors in the space representable by 
+// some linear combination of this independent set stays exactly the same after the change.
+
+// Notice that, in case of Zd2
+//  vector space, the coefficients in the linear combination of vectors must also lie in Z2.
+//  Which means that, an element vector can either stay or not stay in a linear combination, there's no in-between.
+
+// The basis is actually the smallest sized set such that all other vectors in the vector space are representable by a linear combination of just the element vectors of that set.
+
+// The basis vectors are independent.
+
+// For any set with smaller number of independent vectors than the basis, not all of the vectors in the space will be representable.
+
+// And there cannot possibly be larger number of independent vectors than basis in a set. If d  is the size of the basis of a vector space, then the moment you have d
+//  independent vectors in a set, it becomes a basis. You cannot add another vector into it, since that new vector is actually representable using the basis.
+
+// For a d−dimensional vector space, it's basis can have at most d vector elements.
