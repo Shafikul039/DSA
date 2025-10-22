@@ -8,3 +8,6 @@ ll sum_floor_divisions(ll n) {
     }
     return sum;
 }
+
+// n/1 + n/2 + n/3 +....n/n
+//O(sqrt(n))
