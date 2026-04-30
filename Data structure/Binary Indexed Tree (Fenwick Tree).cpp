@@ -1,10 +1,8 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
 const int N = 2e5 + 7;
-ll bit[N], n, arr[N];
+ll bit[N], arr[N];
 
-void update(ll i, ll x) {
+// increment x in arr[i]
+void update(ll i, ll x, ll n) {
     for ( ; i <= n; i += i & (-i)) bit[i] += x;
 }
 
@@ -14,31 +12,6 @@ ll sum(ll i) {
     return ans;
 }
 
-signed main() {
-    ios_base::sync_with_stdio(0); cin.tie(0);
-
-    ll t = 1;
-    //cin >> t;
-
-    while (t--) {
-        ll k; cin >> n >> k;
-
-        for (int i = 1; i <= n; i++) {
-            cin >> arr[i];
-            update(i, arr[i]);
-        }
-
-        while (k--) {
-            ll type; cin >> type;
-            if (type == 1) {
-                ll ind, x; cin >> ind >> x;
-                update(ind, x - arr[ind]);
-                arr[ind] = x;
-            }
-            else {
-                ll l, r; cin >> l >> r;
-                cout << sum(r) - sum(l - 1) << "\n";
-            }
-        }
-    }
+ll query(ll l, ll r) {
+    return sum(r) - sum(l - 1);
 }
